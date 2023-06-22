@@ -501,6 +501,13 @@ KBUILD_CFLAGS   := -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs \
 		   -Werror=implicit-function-declaration -Werror=implicit-int \
 		   -Werror=return-type -Wno-format-security \
 		   -std=gnu89
+#KBUILD_CFLAGS += -Werror $(call cc-disable-warning, strict-prototypes )	
+KBUILD_CFLAGS += -Werror $(call cc-disable-warning, int-conversion )
+KBUILD_CFLAGS += -Werror $(call cc-disable-warning, incompatible-pointer-types )
+KBUILD_CFLAGS += -Werror $(call cc-disable-warning, unused-variable)
+KBUILD_CFLAGS += -Werror $(call cc-disable-warning, align-mismatch)    
+	    
+	    
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -778,9 +785,9 @@ KBUILD_CFLAGS += $(call cc-option,-fno-reorder-blocks,) \
                  $(call cc-option,-fno-partial-inlining)
 endif
 
-ifneq ($(CONFIG_FRAME_WARN),0)
-KBUILD_CFLAGS += $(call cc-option,-Wframe-larger-than=${CONFIG_FRAME_WARN})
-endif
+#ifneq ($(CONFIG_FRAME_WARN),0)
+#KBUILD_CFLAGS += $(call cc-option,-Wframe-larger-than=${CONFIG_FRAME_WARN})
+#endif
 
 stackp-flags-$(CONFIG_CC_HAS_STACKPROTECTOR_NONE) := -fno-stack-protector
 stackp-flags-$(CONFIG_STACKPROTECTOR)             := -fstack-protector
