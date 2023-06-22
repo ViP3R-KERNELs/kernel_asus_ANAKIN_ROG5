@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0
+ccflags-y := -Werror $(call cc-disable-warning, incompatible-pointer-types )
 obj-$(CONFIG_MAC80211) += mac80211.o
 
 # mac80211 objects
